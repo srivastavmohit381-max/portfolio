@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mohit Srivastav - Portfolio</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        color: #333;
+        background-color: #f4f4f4;
+        padding: 20px;
+      }
+      .edit-btn {
+        background-color: #007bff;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        margin: 10px 0;
+      }
+      .edit-btn:hover {
+        background-color: #0056b3;
+      }
+      .save-btn {
+        background-color: #28a745;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        margin: 10px 5px 10px 0;
+      }
+      .save-btn:hover {
+        background-color: #218838;
+      }
+      .contact-boxes {
+        display: flex;
+        gap: 20px;
+        margin: 20px 0;
+        flex-wrap: wrap;
+      }
+      .contact-box {
+        border: 2px solid #333;
+        padding: 20px;
+        border-radius: 8px;
+        text-align: center;
+        min-width: 150px;
+        background-color: #f5f5f5;
+      }
+      .contact-box h3 {
+        margin-top: 0;
+        color: #333;
+      }
+      .contact-box p {
+        margin: 10px 0;
+        word-break: break-all;
+      }
+      .skill-box, .experience-box {
+        background-color: #fff;
+        padding: 15px;
+        margin: 10px 0;
+        border-left: 4px solid #333;
+      }
+      .skills-boxes {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      .name-box {
+        border: 3px solid #333;
+        padding: 20px;
+        border-radius: 10px;
+        background-color: #fff;
+        display: inline-block;
+        margin: 20px auto;
+        white-space: nowrap;
+      }
+      .profile-container {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        margin: 30px 0;
+        gap: 20px;
+        flex-wrap: wrap;
+      }
+      .profile-image {
+        flex: 0;
+        text-align: left;
+        min-width: auto;
+        order: 1;
+      }
+      .image-upload {
+        margin-top: 10px;
+        text-align: left;
+      }
+      .image-upload input {
+        padding: 8px;
+        font-size: 12px;
+        cursor: pointer;
+      }
+      .profile-name {
+        flex: 0;
+        text-align: center;
+        min-width: auto;
+        order: 2;
+      }
+      .edit-input {
+        width: 100%;
+        padding: 8px;
+        margin: 5px 0;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 16px;
+      }
+      .edit-textarea {
+        width: 100%;
+        padding: 8px;
+        margin: 5px 0;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 16px;
+        min-height: 100px;
+        resize: vertical;
+      }
+      .edit-section {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        margin: 20px 0;
+      }
+      .add-skill-btn, .add-exp-btn {
+        background-color: #ffc107;
+        color: #333;
+        padding: 8px 15px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-top: 10px;
+      }
+      .add-skill-btn:hover, .add-exp-btn:hover {
+        background-color: #e0a800;
+      }
+      .remove-btn {
+        background-color: #dc3545;
+        color: white;
+        padding: 5px 10px;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+        margin-left: 10px;
+      }
+      .remove-btn:hover {
+        background-color: #c82333;
+      }
+    </style>
+</head>
+<body>
+  <button class="edit-btn" onclick="toggleEditMode()">✏️ Edit Mode</button>
+
+  <!-- Profile Section -->
+  <div class="profile-container">
+    <div class="profile-image">
+      <img id="profileImg" src="/IMG-20251211-WA0016.jpg" height="200" alt="Profile Picture" style="border-radius: 50%; object-fit: cover; width: 200px;">
+      <div class="image-upload">
+        <input type="file" id="imageInput" accept="image/*" onchange="changeImage(event)">
+      </div>
+    </div>
+    <div class="profile-name">
+      <div class="name-box">
+        <h1 id="userName">Mohit Srivastav</h1>
+      </div>
+    </div>
+  </div>
+
+  <div id="editProfileSection" class="edit-section" style="display: none;">
+    <h3>Edit Profile</h3>
+    <input type="text" id="editName" class="edit-input" placeholder="Your Name" oninput="document.getElementById('userName').textContent = this.value">
+    <input type="text" id="editTitle" class="edit-input" placeholder="Your Title" oninput="document.getElementById('userTitle').innerHTML = '<strong>' + this.value + '</strong>'">
+  </div>
+
+  <hr>
+  <p id="userTitle"><strong>Store & MIS Executive | SAP ERP | Advanced Excel</strong></p>
+  <hr>
+
+  <!-- Contact Section -->
+  <header><h2>Contact Details</h2></header>
+  <div class="contact-boxes">
+    <div class="contact-box">
+      <h3>📞 Phone</h3>
+      <p><a href="tel:+917236021681" id="phoneLink">+91 7236021681</a></p>
+    </div>
+    <div class="contact-box">
+      <h3>📧 Email</h3>
+      <p><a href="mailto:srivastavmohit381@gmail.com" id="emailLink">srivastavmohit381@gmail.com</a></p>
+    </div>
+    <div class="contact-box">
+      <h3>📱 Instagram</h3>
+      <p><a href="https://www.instagram.com/_mohitsrivastav_2?igsh=MzU3OW9zZzR1M2pp" id="instaLink">_mohitsrivastav_2</a></p>
+    </div>
+  </div>
+
+  <div id="editContactSection" class="edit-section" style="display: none;">
+    <h3>Edit Contact</h3>
+    <input type="tel" id="editPhone" class="edit-input" placeholder="Phone">
+    <input type="email" id="editEmail" class="edit-input" placeholder="Email">
+    <input type="url" id="editInsta" class="edit-input" placeholder="Instagram URL">
+  </div>
+
+  <hr>
+
+  <!-- Professional Summary -->
+  <h2>Professional Summary</h2>
+  <p id="summary">
+    Dedicated and detail-oriented Store & MIS Executive with extensive experience in managing inventory, 
+    streamlining operations, and utilizing SAP ERP systems to enhance efficiency. Proficient in Advanced Excel, 
+    enabling data-driven decision-making and reporting. Committed to maintaining accurate records and optimizing 
+    supply chain processes to support organizational goals.
+  </p>
+
+  <div id="editSummarySection" class="edit-section" style="display: none;">
+    <h3>Edit Professional Summary</h3>
+    <textarea id="editSummary" class="edit-textarea"></textarea>
+  </div>
+
+  <hr>
+
+  <!-- Skills Section -->
+  <h2>Skills</h2>
+  <div class="skills-boxes" id="skillsContainer">
+    <div class="skill-box">SAP ERP</div>
+    <div class="skill-box">Advanced Excel</div>
+    <div class="skill-box">Inventory Management</div>
+    <div class="skill-box">Data Analysis</div>
+    <div class="skill-box">GRN</div>
+    <div class="skill-box">Basic HTML</div>
+  </div>
+
+  <div id="editSkillsSection" class="edit-section" style="display: none;">
+    <h3>Edit Skills</h3>
+    <div id="skillsEditContainer"></div>
+    <button class="add-skill-btn" onclick="addSkillInput()">+ Add Skill</button>
+  </div>
+
+  <hr>
+
+  <!-- Experience Section -->
+  <h2>Experience</h2>
+  <div id="experienceContainer">
+    <div class="experience-box">
+      <h3>🏢 BONY POLYMERS (P) LTD, Faridabad</h3>
+      <p><strong>Store & MIS Executive (SAP ERP)</strong></p>
+      <p><strong>June 2025 - November 2025</strong></p>
+      <ul>
+         <li>Maintained GRN and Gate Entry Records</li>
+         <li>Managed Material Issue & Delivery Challans</li>
+         <li>Performed SAP ERP entries for inward, outward, and stock movement</li>
+         <li>Prepared MIS reports using Excel (Pivot Table, VLOOKUP)</li>
+         <li>Coordinated with Accounts & Purchase Teams</li>
+         <li>Supporting data documentation and stock compliance</li>
+      </ul>
+   </div>
+
+   <div class="experience-box">
+      <h3>🏢 ESCORTS KUBOTA LIMITED (SPD), Faridabad</h3>
+      <p><strong>Store Support Executive (ERP)</strong></p>
+      <p><strong>January 2025 - May 2025</strong></p>
+      <ul>
+         <li>Handled ERP data entry and inventory tasks</li>
+         <li>Maintained documentation and reports</li>
+      </ul>
+   </div>
+
+   <div class="experience-box">
+      <h3>🏢 VISHWAH INDUSTRIAL AUTOTECH PVT LIMITED</h3>
+      <p><strong>Store & MIS Executive (MAWAI ERP)</strong></p>
+      <p><strong>December 2024 - November 2025</strong></p>
+      <ul>
+         <li>Maintained GRN and Gate Entry Records</li>
+         <li>Managed inventory operations</li>
+      </ul>
+   </div>
+  </div>
+
+  <div id="editExperienceSection" class="edit-section" style="display: none;">
+    <h3>Edit Experience</h3>
+    <div id="experienceEditContainer"></div>
+    <button class="add-exp-btn" onclick="addExperienceInput()">+ Add Experience</button>
+  </div>
+
+  <hr>
+  <button class="save-btn" id="saveBtn" onclick="saveChanges()" style="display: none;">💾 Save Changes</button>
+
+  <script>
+    let editMode = false;
+    let portfolioData = JSON.parse(localStorage.getItem('portfolioData')) || {
+      name: 'Mohit Srivastav',
+      title: 'Store & MIS Executive | SAP ERP | Advanced Excel',
+      phone: '+91 7236021681',
+      email: 'srivastavmohit381@gmail.com',
+      insta: 'https://www.instagram.com/_mohitsrivastav_2?igsh=MzU3OW9zZzR1M2pp',
+      instaName: '_mohitsrivastav_2',
+      summary: 'Dedicated and detail-oriented Store & MIS Executive with extensive experience in managing inventory, streamlining operations, and utilizing SAP ERP systems to enhance efficiency. Proficient in Advanced Excel, enabling data-driven decision-making and reporting. Committed to maintaining accurate records and optimizing supply chain processes to support organizational goals.',
+      skills: ['SAP ERP', 'Advanced Excel', 'Inventory Management', 'Data Analysis', 'GRN', 'Basic HTML'],
+      experience: [
+        { company: 'BONY POLYMERS (P) LTD, Faridabad', position: 'Store & MIS Executive (SAP ERP)', period: 'June 2025 - November 2025', points: ['Maintained GRN and Gate Entry Records', 'Managed Material Issue & Delivery Challans', 'Performed SAP ERP entries for inward, outward, and stock movement', 'Prepared MIS reports using Excel (Pivot Table, VLOOKUP)', 'Coordinated with Accounts & Purchase Teams', 'Supporting data documentation and stock compliance'] },
+        { company: 'ESCORTS KUBOTA LIMITED (SPD), Faridabad', position: 'Store Support Executive (ERP)', period: 'January 2025 - May 2025', points: ['Handled ERP data entry and inventory tasks', 'Maintained documentation and reports'] },
+        { company: 'VISHWAH INDUSTRIAL AUTOTECH PVT LIMITED', position: 'Store & MIS Executive (MAWAI ERP)', period: 'December 2024 - November 2025', points: ['Maintained GRN and Gate Entry Records', 'Managed inventory operations'] }
+      ]
+    };
+
+    function toggleEditMode() {
+      editMode = !editMode;
+      document.getElementById('editProfileSection').style.display = editMode ? 'block' : 'none';
+      document.getElementById('editContactSection').style.display = editMode ? 'block' : 'none';
+      document.getElementById('editSummarySection').style.display = editMode ? 'block' : 'none';
+      document.getElementById('editSkillsSection').style.display = editMode ? 'block' : 'none';
+      document.getElementById('editExperienceSection').style.display = editMode ? 'block' : 'none';
+      document.getElementById('saveBtn').style.display = editMode ? 'inline-block' : 'none';
+
+      if (editMode) {
+        loadEditFields();
+      }
+    }
+
+    function loadEditFields() {
+      document.getElementById('editName').value = portfolioData.name;
+      document.getElementById('editTitle').value = portfolioData.title;
+      document.getElementById('editPhone').value = portfolioData.phone;
+      document.getElementById('editEmail').value = portfolioData.email;
+      document.getElementById('editInsta').value = portfolioData.insta;
+      document.getElementById('editSummary').value = portfolioData.summary;
+      
+      // Skills
+      let skillsHtml = '';
+      portfolioData.skills.forEach((skill, index) => {
+        skillsHtml += '<div><input type="text" class="edit-input" value="' + skill + '" onchange="updateSkill(' + index + ', this.value)"> <button class="remove-btn" onclick="removeSkill(' + index + ')">Remove</button></div>';
+      });
+      document.getElementById('skillsEditContainer').innerHTML = skillsHtml;
+
+      // Experience
+      let expHtml = '';
+      portfolioData.experience.forEach((exp, index) => {
+        expHtml += '<div class="edit-section"><h4>Experience ' + (index + 1) + '</h4><input type="text" class="edit-input" value="' + exp.company + '" placeholder="Company" onchange="updateExperience(' + index + ', \'company\', this.value)"><input type="text" class="edit-input" value="' + exp.position + '" placeholder="Position" onchange="updateExperience(' + index + ', \'position\', this.value)"><input type="text" class="edit-input" value="' + exp.period + '" placeholder="Period" onchange="updateExperience(' + index + ', \'period\', this.value)"><h5>Points:</h5><div id="points-' + index + '"></div><button class="remove-btn" onclick="removeExperience(' + index + ')">Remove Experience</button></div>';
+      });
+      document.getElementById('experienceEditContainer').innerHTML = expHtml;
+
+      // Experience points
+      portfolioData.experience.forEach((exp, expIndex) => {
+        let pointsHtml = '';
+        exp.points.forEach((point, pointIndex) => {
+          pointsHtml += '<input type="text" class="edit-input" value="' + point + '" onchange="updateExperiencePoint(' + expIndex + ', ' + pointIndex + ', this.value)">';
+        });
+        document.getElementById('points-' + expIndex).innerHTML = pointsHtml;
+      });
+    }
+
+    function updateSkill(index, value) {
+      portfolioData.skills[index] = value;
+    }
+
+    function removeSkill(index) {
+      portfolioData.skills.splice(index, 1);
+      loadEditFields();
+    }
+
+    function addSkillInput() {
+      portfolioData.skills.push('New Skill');
+      loadEditFields();
+    }
+
+    function updateExperience(index, field, value) {
+      portfolioData.experience[index][field] = value;
+    }
+
+    function updateExperiencePoint(expIndex, pointIndex, value) {
+      portfolioData.experience[expIndex].points[pointIndex] = value;
+    }
+
+    function removeExperience(index) {
+      portfolioData.experience.splice(index, 1);
+      loadEditFields();
+    }
+
+    function addExperienceInput() {
+      portfolioData.experience.push({ company: 'Company', position: 'Position', period: 'Period', points: ['Point 1'] });
+      loadEditFields();
+    }
+
+    function saveChanges() {
+      portfolioData.name = document.getElementById('editName').value;
+      portfolioData.title = document.getElementById('editTitle').value;
+      portfolioData.phone = document.getElementById('editPhone').value;
+      portfolioData.email = document.getElementById('editEmail').value;
+      portfolioData.insta = document.getElementById('editInsta').value;
+      portfolioData.summary = document.getElementById('editSummary').value;
+
+      localStorage.setItem('portfolioData', JSON.stringify(portfolioData));
+      renderPortfolio();
+      toggleEditMode();
+      alert('✅ Changes saved! Your changes will remain when you reload the page.');
+    }
+
+    function renderPortfolio() {
+      document.getElementById('userName').textContent = portfolioData.name;
+      document.getElementById('userTitle').innerHTML = '<strong>' + portfolioData.title + '</strong>';
+      document.getElementById('phoneLink').textContent = portfolioData.phone;
+      document.getElementById('phoneLink').href = 'tel:' + portfolioData.phone;
+      document.getElementById('emailLink').textContent = portfolioData.email;
+      document.getElementById('emailLink').href = 'mailto:' + portfolioData.email;
+      document.getElementById('instaLink').href = portfolioData.insta;
+      document.getElementById('instaLink').textContent = portfolioData.instaName;
+      document.getElementById('summary').textContent = portfolioData.summary;
+
+      // Skills
+      let skillsHtml = '';
+      portfolioData.skills.forEach(skill => {
+        skillsHtml += '<div class="skill-box">' + skill + '</div>';
+      });
+      document.getElementById('skillsContainer').innerHTML = skillsHtml;
+
+      // Experience
+      let expHtml = '';
+      portfolioData.experience.forEach(exp => {
+        expHtml += '<div class="experience-box"><h3>🏢 ' + exp.company + '</h3><p><strong>' + exp.position + '</strong></p><p><strong>' + exp.period + '</strong></p><ul>';
+        exp.points.forEach(point => {
+          expHtml += '<li>' + point + '</li>';
+        });
+        expHtml += '</ul></div>';
+      });
+      document.getElementById('experienceContainer').innerHTML = expHtml;
+    }
+
+    function changeImage(event) {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          document.getElementById('profileImg').src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+
+    renderPortfolio();
+  </script>
+</body>
+</html>
